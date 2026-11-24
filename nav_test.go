@@ -2,7 +2,10 @@ package main
 
 import (
 	"bytes"
+	"image/color"
+	"image/png"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -88,5 +91,27 @@ func TestBridgeRefuses(t *testing.T) {
 		if err == nil || !strings.Contains(err.Error(), tc.want) {
 			t.Errorf("%v %v: err %v, want %q", tc.p1, tc.p2, err, tc.want)
 		}
+	}
+}
+
+func TestPNGWorldOrientation(t *testing.T) {
+	m := strip()
+	// Highlight the cell with the highest x and lowest y.
+	path := filepath.Join(t.TempDir(), "map.png")
+	if err := writePNG(m, m.Cells[2:3], 1.5, 1.5, 1.5, path); err != nil {
+		t.Fatal(err)
+	}
+	f, err := os.Open(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer f.Close()
+	img, err := png.Decode(f)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := color.RGBAModel.Convert(img.At(3*imgSize/4, imgSize/4))
+	if want := (color.RGBA{0x3c, 0xb0, 0x43, 0xff}); got != want {
+		t.Fatalf("top-right cell has color %v, want %v", got, want)
 	}
 }

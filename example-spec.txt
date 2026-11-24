@@ -1,4 +1,4 @@
 # navtool spec: one command per line, # starts a comment. Coordinates = navmesh.dat x y.
 # Both bridges checked in game (Wartales 1.0.48274): the army walks straight through.
 bridge 1580 2202 1612 2204   # T2 Cortia: west gate -> east gate
-bridge 2302 1772 2307 1734   # T1 Stromkapp: north -> south
+bridge 2302 1772 2307 1734   # T1 Stromkapp: south -> north

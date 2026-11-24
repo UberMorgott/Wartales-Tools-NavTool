@@ -25,7 +25,7 @@ navtool apply <ванильный navmesh.dat> <spec.txt> <новый navmesh.da
 
 1. **Ванильный файл.** Достаньте quickbms из `assets.pak` файл `assets/worldmap/collides/navmesh.dat` (как и другие файлы). Всегда работайте от *ванильного* файла.
 2. **Найдите город.** Координаты всех городов: [docs/towns.md](docs/towns.md). Или: `x`/`y` города в `content/regions/<Регион>/POI/Region*.prefab`, затем `navtool holes navmesh.dat <x> <y> 40` — покажет дыру города.
-3. **Картинка.** `navtool png navmesh.dat 1597 2203 45 town.png` — светлое = проходимо, тёмное = дыры, синяя сетка подписана координатами (x слева направо, y снизу вверх; подпись линии — её значение).
+3. **Картинка.** `navtool png navmesh.dat 1597 2203 45 town.png` — светлое = проходимо, тёмное = дыры, синяя сетка подписана координатами (x растёт вправо, y растёт вниз, как на карте мира).
 4. **Spec.** Выберите две точки на краю тёмной дыры, где дорога входит и выходит (до края ≤ 10 единиц), запишите `bridge x1 y1 x2 y2`.
 5. **Проверка.** `navtool png navmesh.dat 1597 2203 45 check.png spec.txt` — мост зелёный.
 6. **Сборка.** `navtool apply navmesh.dat spec.txt navmesh.new` → `line 1: new cell 184806 joins cells 95516 and 99895`.
